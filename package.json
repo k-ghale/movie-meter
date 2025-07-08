@@ -1,0 +1,8 @@
+{
+  "name": "movie-meter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/k-ghale/movie-meter.git",
+  "author": "k-ghale <kabinghale888@gmail.com>",
+  "license": "MIT"
+}
