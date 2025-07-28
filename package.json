@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/k-ghale/movie-meter.git",
   "author": "k-ghale <kabinghale888@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
 }
