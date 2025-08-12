@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import SearchPage from '../pages/Search';
 
 export default function Header({ user, onLogout }) {
   const navigate = useNavigate();
-
+  const [query, setQuery] = useState('');
+  
   const handleLogout = () => {
     if (onLogout) {
       onLogout();       // Call parent logout to clear user state
     }
     navigate('/login');  // Redirect to login page
   };
+
 
   return (
     <header className="backdrop-blur-md bg-black/50 shadow-lg border-b border-gray-700 sticky top-0 z-50">
@@ -22,6 +25,16 @@ export default function Header({ user, onLogout }) {
         >
           🎥 Movie Meter
         </Link>
+
+        <Link
+  to="/search"
+  className="
+  bg-yellow-400 text-black px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-300 transition duration-300 select-none flex items-center space-x-2"
+  
+>
+  Search
+</Link>
+
 
         {/* Navigation */}
         <nav className="flex items-center space-x-6 text-gray-200">
