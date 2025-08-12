@@ -23,8 +23,10 @@ export default function Login({ setUser }){
       <form onSubmit={submit} className="space-y-4">
         <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email" className="w-full p-2 rounded bg-gray-900" required />
         <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" className="w-full p-2 rounded bg-gray-900" required />
-        <button className="w-full bg-red-600 py-2 rounded">Log in</button>
+        <button className="w-full bg-red-600 py-2 rounded hover:bg-red-700 transition duration-300">Log in</button>
       </form>
+
+      <a href="/register" className="text-blue-400 hover:underline">Create an account</a>
     </div>
   );
 }

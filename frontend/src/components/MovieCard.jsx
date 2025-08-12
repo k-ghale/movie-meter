@@ -5,19 +5,24 @@ export default function MovieCard({ movie }) {
   return (
     <Link
       to={`/movies/${movie._id}`}
-      className="block bg-gray-900 rounded-lg overflow-hidden shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl"
+      className="group bg-gray-899 rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl max-w-xs mx-auto"
     >
+      {/* Movie Poster */}
       {movie.posterUrl && (
         <img
           src={movie.posterUrl}
           alt={`${movie.title} Poster`}
-          className="w-50 h-56"
+          className="w-64 h-96 mx-auto object-cover transition-transform duration-300 group-hover:scale-105 flex justify-center items-center"
         />
       )}
-      <div className="p-4">
-        <h3 className="text-xl font-bold text-white truncate">{movie.title}</h3>
-        <p className="text-sm text-indigo-400 mt-1">{movie.year}</p>
-        <p className="mt-3 text-gray-300 text-sm line-clamp-3">
+
+      {/* Movie Info */}
+      <div className="p-3">
+        <h4 className="text-lg font-bold text-white truncate text-center group-hover:text-yellow-300 transition">
+          {movie.title}
+        </h4>
+        <p className="text-gray-400 text-center">{movie.year}</p>
+        <p className="mt-2 text-sm text-gray-300 h-16 overflow-hidden text-center">
           {movie.description || 'No description available.'}
         </p>
       </div>

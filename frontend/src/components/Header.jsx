@@ -1,12 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-export default function Header({ user }){
+import { Link, useNavigate } from 'react-router-dom';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+
+export default function Header({ user, onLogout }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (onLogout) {
+      onLogout();       // Call parent logout to clear user state
+    }
+    navigate('/login');  // Redirect to login page
+  };
+
   return (
-    <header className="bg-gray-900 border-b border-gray-800 p-4">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold">🎬 Movie Reviewer</Link>
-        <nav className="space-x-4">
-          {user ? <span>{user.name}</span> : <Link to="/login">Log in</Link>}
+    <header className="backdrop-blur-md bg-black/50 shadow-lg border-b border-gray-700 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+        {/* Logo / Title */}
+        <Link
+          to="/"
+          className="text-3xl font-extrabold text-yellow-400 tracking-wide hover:text-yellow-300 transition-colors duration-300 select-none"
+        >
+          🎥 Movie Meter
+        </Link>
+
+        {/* Navigation */}
+        <nav className="flex items-center space-x-6 text-gray-200">
+          {user ? (
+            <>
+              <div className="flex items-center space-x-3 cursor-pointer group relative">
+                <UserCircleIcon className="w-7 h-7 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-300" />
+                <span className="font-semibold select-none">{user.name}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full font-semibold shadow-md transition duration-300 select-none"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-yellow-400 text-black px-5 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-300 transition duration-300 select-none"
+            >
+              Log in
+            </Link>
+          )}
         </nav>
       </div>
     </header>

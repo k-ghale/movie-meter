@@ -1,22 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Movie from './pages/Movie';
-import AddReview from './pages/AddReview';
 import Header from './components/Header';
-import { setAuthToken } from './services/api';
-function App(){
+import API, { setAuthToken} from './services/api';
+import AddReview from './pages/AddReview';
+
+function App() {
   const [user, setUser] = useState(null);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(token){ setAuthToken(token); }
+    if (token) {
+      setAuthToken(token);
+      API.get('/auth/me')
+        .then(res => setUser(res.data))
+        .catch(() => {
+          setUser(null);
+          setAuthToken(null);
+          localStorage.removeItem('token');
+        });
+    }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setAuthToken(null);
+    setUser(null);
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <Header user={user} setUser={setUser} />
-      <main className="p-4">
+      <Header user={user} onLogout={handleLogout} />
+      <main className="p-4 max-w-7xl mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
@@ -28,4 +47,5 @@ function App(){
     </div>
   );
 }
+
 export default App;

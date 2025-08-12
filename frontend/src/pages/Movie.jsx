@@ -12,6 +12,11 @@ export default function Movie(){
   if(!movie) return <div>Loading...</div>;
   return (
     <div className="max-w-3xl mx-auto bg-gray-800 p-6 rounded">
+      <img
+        src={movie.posterUrl}
+        alt={`${movie.title} Poster`}
+        className="w-64 h-96 object-cover mx-auto transition-transform duration-300 group-hover:scale-105"
+      />
       <h1 className="text-2xl font-bold">{movie.title} ({movie.year})</h1>
       <p className="mt-2 text-gray-300">{movie.description}</p>
       <div className="mt-4">
@@ -25,7 +30,7 @@ export default function Movie(){
             </li>
           ))}
         </ul>
-        <Link to={`/movies/${id}/add-review`} className="inline-block mt-4 bg-red-600 py-2 px-3 rounded">Add Review</Link>
+        <Link to={`/movies/${id}/add-review`} className="inline-block mt-4 bg-yellow-300 text-black py-2 px-3 rounded">Add Review</Link>
       </div>
     </div>
   );
