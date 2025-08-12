@@ -5,7 +5,7 @@ const connectDB = require('./config/db');
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
-connectDB(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/moviereviewer');
+connectDB(process.env.MONGO_URI );
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/movies', require('./routes/movies'));
 app.use('/api/reviews', require('./routes/reviews'));
